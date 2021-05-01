@@ -1,4 +1,5 @@
 // data
+let timer;
 const SECONDS_IN_MINUTES=60;
 let leftTIme=25*SECONDS_IN_MINUTES+0;
 // cashing dom
@@ -15,13 +16,19 @@ stopButton.addEventListener('click',stop);
 render();
 // functions
 function start(){
-    setInterval(tick,1000);
+    if(!timer){
+        timer=setInterval(tick,1000);
+    }
+    
 }
 function tick(){
     leftTIme-=1;
     render();
 }
-function stop(){}
+function stop(){
+    clearInterval(timer);
+    timer=0;
+}
 function render(){
     const minutesLeft=Math.floor(leftTIme/SECONDS_IN_MINUTES);
     const secondLeft=leftTIme%SECONDS_IN_MINUTES;
